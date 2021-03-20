@@ -6,7 +6,7 @@ const completedSchema = new mongoose.Schema(
     workoutid: { type: String, required: true },
     calories: { type: Number, required: true },
   },
-  { timespams: { createdAt: "created_at" } }
+  { timestamps: { createdAt: "created_at" } }
 );
 
 module.exports = Completed = mongoose.model("completed", completedSchema);

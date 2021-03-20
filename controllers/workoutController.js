@@ -51,29 +51,25 @@ module.exports.createWorkout = async (req, res) => {
 };
 //========================================================================================
 /*                                                                                      *
- *                              Workout
+ *                              get workouts
  *                                                                                      */
-//========================================================================================
-//========================================================================================
-/*                                                                                      *
- *                              Workout
- *                                                                                      */
-//========================================================================================
-//========================================================================================
-/*                                                                                      *
- *                              Workout
- *                                                                                      */
-//========================================================================================
-//========================================================================================
-/*                                                                                      *
- *                              Workout
- *                                                                                      */
-//========================================================================================
-//========================================================================================
-/*                                                                                      *
- *                              Workout
- *                                                                                      */
-//========================================================================================
+//========================================================================================]
+
+module.exports.getWorkout = async (req, res) => {
+  try {
+    const { category } = req.body;
+    if (category == "general") {
+      const ans = await Workout.find({});
+      res.json(ans);
+    } else {
+      const ans = await Workout.find({ category: category });
+      res.json(ans);
+    }
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
+
 //========================================================================================
 /*                                                                                      *
  *                              Workout completed
@@ -82,20 +78,81 @@ module.exports.createWorkout = async (req, res) => {
 
 module.exports.completedworkout = async (req, res) => {
   try {
-    console.log(req.user);
     const workoutid = req.params.wid;
-    console.log(workoutid);
+    // console.log(workoutid);
     const temp = await Workout.findById(workoutid);
-    console.log(temp);
-    // const newComplete = new Completed({
-    //   userid: userid,
-    //   workoutid: workoutid,
-    //   calories:
-    // });
+    const newComplete = new Completed({
+      userid: req.user,
+      workoutid: workoutid,
+      calories: temp.calories,
+    });
 
-    // const saved = await newComplete.save();
-    res.status(200).json(temp);
+    const saved = await newComplete.save();
+    res.json(saved);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
 };
+
+//========================================================================================
+/*                                                                                      *
+ *                              Workout leaderboard
+ *                                                                                      */
+//========================================================================================
+
+module.exports.getLeaderboard = async (req, res) => {
+  try {
+    const ans = await Completed.aggregate([
+      {
+        $group: {
+          _id: "$userid",
+          totalcalories: { $sum: "$calories" },
+        },
+      },
+      { $sort: { totalcalories: -1 } },
+    ]);
+    console.log(ans);
+    res.json(ans);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
+
+//========================================================================================
+/*                                                                                      *
+ *                              Workout leaderboard today
+ *                                                                                      */
+//========================================================================================
+
+module.exports.getLeaderboardtoday = async (req, res) => {
+  try {
+    var start = new Date();
+    start.setHours(0, 0, 0, 0);
+    var end = new Date();
+    end.setHours(23, 59, 59, 999);
+
+    const ans = await Completed.aggregate([
+      {
+        $match: { created_at: { $gte: start, $lte: end } },
+      },
+      {
+        $group: {
+          _id: "$userid",
+          totalcalories: { $sum: "$calories" },
+        },
+      },
+      { $sort: { totalcalories: -1 } },
+    ]);
+
+    console.log(ans);
+    res.json(ans);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
+
+//========================================================================================
+/*                                                                                      *
+ *                              Workout
+ *                                                                                      */
+//========================================================================================
