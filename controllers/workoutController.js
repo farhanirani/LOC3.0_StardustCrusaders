@@ -79,10 +79,12 @@ module.exports.getWorkout = async (req, res) => {
 module.exports.completedworkout = async (req, res) => {
   try {
     const workoutid = req.params.wid;
+    const { username } = req.body;
     // console.log(workoutid);
     const temp = await Workout.findById(workoutid);
     const newComplete = new Completed({
       userid: req.user,
+      username: username,
       workoutid: workoutid,
       calories: temp.calories,
     });
@@ -106,6 +108,7 @@ module.exports.getLeaderboard = async (req, res) => {
       {
         $group: {
           _id: "$userid",
+          username: { $first: "$username" },
           totalcalories: { $sum: "$calories" },
         },
       },
@@ -138,6 +141,7 @@ module.exports.getLeaderboardtoday = async (req, res) => {
       {
         $group: {
           _id: "$userid",
+          username: { $first: "$username" },
           totalcalories: { $sum: "$calories" },
         },
       },

@@ -1,0 +1,10 @@
+* {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.leaderboard_table {
+  overflow-y: scroll;
+}
