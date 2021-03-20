@@ -35,8 +35,6 @@
   justify-content: flex-start;
   width: 800px;
   min-height: 600px;
-  max-height: 100vh;
-  max-width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
   margin: 128px auto;
