@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 // import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
+import Fab from "@material-ui/core/Fab";
 
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
   const [link, setLink] = useState(props.edit ? props.edit.value : "");
   const [time, setTime] = React.useState("");
+  const [title, setTitle] = useState(props.edit ? props.edit.value : "");
+  const [calory, setCalory] = useState(props.edit ? props.edit.value : "");
+  const [category, setCategory] = useState(props.edit ? props.edit.value : "");
+  const [description, setDescription] = useState(
+    props.edit ? props.edit.value : ""
+  );
 
   // const inputRef = useRef(null);
 
@@ -17,12 +24,28 @@ function TodoForm(props) {
     setInput(e.target.value);
   };
 
-  const handleChange3 = (e) => {
+  const handleChange2 = (e) => {
     setLink(e.target.value);
   };
 
-  const onChange = (event) => {
+  const handleChange3 = (event) => {
     setTime(event.target.value);
+  };
+
+  const handleChange4 = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChange5 = (e) => {
+    setCalory(e.target.value);
+  };
+
+  const handleChange6 = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const handleChange7 = (e) => {
+    setDescription(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -39,54 +62,16 @@ function TodoForm(props) {
     setLink("");
   };
 
+  const handleSubmit2 = (e) => {};
+
   return (
-    <form onSubmit={handleSubmit} className="todo-form">
-      {props.edit ? (
-        <>
-          <input
-            placeholder="Add Workout"
-            value={input}
-            onChange={handleChange1}
-            name="text"
-            required
-            className="todo-input"
-            style={{ overflowX: "hidden" }}
-
-            // ref={inputRef}
-          />
-          <input
-            placeholder="Time in sec."
-            value={time}
-            onChange={onChange}
-            name="text"
-            type="number"
-            required
-            className="todo-input"
-            style={{ overflowX: "hidden", width: "130px", paddingRight: "5px" }}
-
-            // ref={inputRef}
-          />
-          <input
-            placeholder="Add a tutorial"
-            value={link}
-            onChange={handleChange3}
-            name="url"
-            className="todo-input"
-            required
-            style={{ overflowX: "hidden", width: "130px", paddingRight: "5px" }}
-            // ref={inputRef}
-          />
-
-          <button onClick={handleSubmit} className="todo-button edit">
-            Update
-          </button>
-        </>
-      ) : (
+    <>
+      <form onSubmit={handleSubmit2} className="todo-form">
         <>
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-evenly",
               alignItems: "center",
               marginBottom: "20px",
             }}
@@ -94,18 +79,34 @@ function TodoForm(props) {
             <input
               placeholder="Workout Name"
               name="text"
+              value={title}
+              onChange={handleChange4}
               required
               className="todo-input"
-              style={{ overflowX: "hidden", width: "350px" }}
+              style={{ overflowX: "hidden", width: "320px" }}
+            ></input>
+            <input
+              placeholder="KCal"
+              name="text"
+              value={calory}
+              onChange={handleChange5}
+              type="number"
+              required
+              className="todo-input"
+              style={{
+                overflowX: "hidden",
+                width: "70px",
+                paddingRight: "2px",
+              }}
             ></input>
             <select
               id="dropdown"
-              value={input}
-              onChange={handleChange1}
+              value={category}
+              onChange={handleChange6}
               name="text"
               required
               className="todo-input"
-              style={{ overflowX: "hidden", width: "350px", cursor: "pointer" }}
+              style={{ overflowX: "hidden", width: "320px", cursor: "pointer" }}
             >
               <option value="N/A">Category</option>
               <option value="1">Body</option>
@@ -124,8 +125,8 @@ function TodoForm(props) {
           >
             <input
               placeholder="Workout Description"
-              value={input}
-              onChange={handleChange1}
+              value={description}
+              onChange={handleChange7}
               name="text"
               required
               className="todo-input"
@@ -139,7 +140,8 @@ function TodoForm(props) {
               // ref={inputRef}
             />
           </div>
-          <div
+          <form
+            onSubmit={handleSubmit}
             style={{
               display: "flex",
               justifyContent: "center",
@@ -160,7 +162,7 @@ function TodoForm(props) {
             <input
               placeholder="Time in sec."
               value={time}
-              onChange={onChange}
+              onChange={handleChange3}
               name="text"
               type="number"
               required
@@ -176,7 +178,7 @@ function TodoForm(props) {
             <input
               placeholder="Tutorial Link"
               value={link}
-              onChange={handleChange3}
+              onChange={handleChange2}
               name="url"
               className="todo-input"
               required
@@ -190,48 +192,41 @@ function TodoForm(props) {
             <button onClick={handleSubmit} className="todo-button">
               Add to workout
             </button>
-          </div>
+          </form>
         </>
-      )}
-    </form>
+        <Fab
+          variant="extended"
+          onClick={handleSubmit2}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            right: "25%",
+            left: "50%",
+            marginLeft: "-50px",
+            background: "#4bb543",
+            color: "#fff",
+            padding: "0px 20px",
+          }}
+        >
+          {/* <NavigationIcon style={{ marginRight: "5px" }} /> */}
+          Submit
+        </Fab>
+      </form>
+    </>
   );
 }
 
 const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
-  const [edit, setEdit] = useState({
-    id: null,
-    value: "",
-  });
-
-  const submitUpdate = (value) => {
-    updateTodo(edit.id, value);
-    setEdit({
-      id: null,
-      value: "",
-    });
-  };
-
-  if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
-  }
-
   return todos.map((todo, index) => (
     <div
       className={todo.isComplete ? "todo-row complete" : "todo-row"}
       key={index}
     >
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.text}
-      </div>
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.time} sec.
-      </div>
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        <a
-          href={todo.link}
-          style={{ color: "#fff", textDecoration: "none", cursor: "pointer" }}
-        >
-          Tutorial{" "}
+      <div>{todo.text}</div>
+      <div>{todo.time} sec.</div>
+      <div>
+        <a href={todo.link} style={{ color: "#fff", cursor: "pointer" }}>
+          Tutorial
         </a>
       </div>
       <div className="icons">
@@ -264,7 +259,7 @@ function TodoList() {
     const newTodos = [todo, ...todos];
 
     setTodos(newTodos);
-    console.log(...todos);
+    console.log(newTodos);
   };
 
   const updateTodo = (todoId, newValue) => {
@@ -295,14 +290,18 @@ function TodoList() {
 
   return (
     <>
-      <h1>Create your Training Workout</h1>
+      <h1 style={{ color: "#000", fontWeight: "700" }}>
+        Create your Training Workout
+      </h1>
       <TodoForm onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      />
+      {todos && (
+        <Todo
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+      )}
     </>
   );
 }

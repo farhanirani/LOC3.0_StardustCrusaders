@@ -88,24 +88,7 @@ function App(props) {
           alignItems: "center",
           justifyContent: "center",
         }}
-      >
-        <Fab
-          variant="extended"
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            right: "25%",
-            left: "50%",
-            marginLeft: "-50px",
-            background: "#4bb543",
-            color: "#fff",
-            padding: "0px 20px",
-          }}
-        >
-          {/* <NavigationIcon style={{ marginRight: "5px" }} /> */}
-          Submit
-        </Fab>
-      </div>
+      ></div>
     </div>
   );
 }
