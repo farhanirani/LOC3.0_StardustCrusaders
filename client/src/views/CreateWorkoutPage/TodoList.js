@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// import TodoForm from "./TodoForm";
+import { RiCloseCircleLine } from "react-icons/ri";
 
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -193,4 +195,114 @@ function TodoForm(props) {
   );
 }
 
-export default TodoForm;
+const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+  const [edit, setEdit] = useState({
+    id: null,
+    value: "",
+  });
+
+  const submitUpdate = (value) => {
+    updateTodo(edit.id, value);
+    setEdit({
+      id: null,
+      value: "",
+    });
+  };
+
+  if (edit.id) {
+    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+  }
+
+  return todos.map((todo, index) => (
+    <div
+      className={todo.isComplete ? "todo-row complete" : "todo-row"}
+      key={index}
+    >
+      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+        {todo.text}
+      </div>
+      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+        {todo.time} sec.
+      </div>
+      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+        <a
+          href={todo.link}
+          style={{ color: "#fff", textDecoration: "none", cursor: "pointer" }}
+        >
+          Tutorial{" "}
+        </a>
+      </div>
+      <div className="icons">
+        <RiCloseCircleLine
+          onClick={() => removeTodo(todo.id)}
+          className="delete-icon"
+        />
+        {/* <TiEdit
+          onClick={() => setEdit({ id: todo.id, value: todo.text })}
+          className="edit-icon"
+        /> */}
+      </div>
+    </div>
+  ));
+};
+
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (todo) => {
+    if (
+      !todo.text ||
+      (/^\s*$/.test(todo.text) && !todo.value) ||
+      (/^\s*$/.test(todo.value) && !todo.link) ||
+      /^\s*$/.test(todo.link)
+    ) {
+      return;
+    }
+
+    const newTodos = [todo, ...todos];
+
+    setTodos(newTodos);
+    console.log(...todos);
+  };
+
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return;
+    }
+
+    setTodos((prev) =>
+      prev.map((item) => (item.id === todoId ? newValue : item))
+    );
+  };
+
+  const removeTodo = (id) => {
+    const removedArr = [...todos].filter((todo) => todo.id !== id);
+
+    setTodos(removedArr);
+  };
+
+  const completeTodo = (id) => {
+    let updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.isComplete = !todo.isComplete;
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+  return (
+    <>
+      <h1>Create your Training Regimen</h1>
+      <TodoForm onSubmit={addTodo} />
+      <Todo
+        todos={todos}
+        completeTodo={completeTodo}
+        removeTodo={removeTodo}
+        updateTodo={updateTodo}
+      />
+    </>
+  );
+}
+
+export default TodoList;

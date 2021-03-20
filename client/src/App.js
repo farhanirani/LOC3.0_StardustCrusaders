@@ -9,7 +9,7 @@ import UserContext from "./context/UserContext";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage.js";
 import LoginPage from "views/LoginPage.js";
-import WorkOutPage from "views/CreateWorkoutPage/App";
+import WorkOutPage from "views/CreateWorkoutPage/CreateWorkoutPage";
 import HomePage from "views/HomePage/HomePage";
 // import HomePage from "views/HomePage/HomePage";
 
