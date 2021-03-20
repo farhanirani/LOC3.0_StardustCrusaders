@@ -9,6 +9,7 @@
   "author": "fki kg",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
