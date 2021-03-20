@@ -7,6 +7,8 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import CountDown from "views/WorkoutPage/Timer/App";
+import Button from "@material-ui/core/Button";
+import Flip from "react-reveal/Flip";
 
 const dashboardRoutes = [];
 
@@ -205,6 +207,29 @@ export default function LandingPage(props) {
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "100px",
+            }}
+          >
+            <Flip top>
+              <Button
+                variant="contained"
+                size="large"
+                style={{
+                  background: "#FCFE9C",
+                  borderRadius: "20px",
+                  color: "#1D1D1D",
+                  fontWeight: "700",
+                }}
+              >
+                Workout Completed!
+              </Button>
+            </Flip>
           </div>
         </div>
       </div>
