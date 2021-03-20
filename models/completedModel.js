@@ -4,7 +4,7 @@ const completedSchema = new mongoose.Schema(
   {
     userid: { type: String, required: true },
     workoutid: { type: String, required: true },
-    calories: { type: Integer, required: true },
+    calories: { type: Number, required: true },
   },
   { timespams: { createdAt: "created_at" } }
 );

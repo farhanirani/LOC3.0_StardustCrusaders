@@ -16,4 +16,21 @@ router.post("/users/checktoken", User.tokenIsValid);
 
 // router.delete("/users/delete", auth, User.deleteUser);
 
+//========================================================================================
+/*                                                                                      *
+ *                              Workout Routes
+ *                                                                                      */
+//========================================================================================
+
+const Workout = require("./controllers/workoutController");
+
+router.post("/workout/create", auth, Workout.createWorkout);
+router.post("/workout/completed/:wid", auth, Workout.completedworkout);
+
+//========================================================================================
+/*                                                                                      *
+ *                              asdasdasd Routes
+ *                                                                                      */
+//========================================================================================
+
 module.exports = router;
