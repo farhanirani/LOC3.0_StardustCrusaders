@@ -5,6 +5,7 @@ const workoutSchema = new mongoose.Schema({
   desc: { type: String, required: true },
   category: { type: String, required: true },
   creatorID: { type: String, required: true },
+  creatorname: { type: String, required: true },
   calories: { type: Number, required: true },
   approved: { type: Boolean, required: true, default: false },
   upvotes: { type: Array, required: true },

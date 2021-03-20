@@ -24,7 +24,7 @@ module.exports.homeUser = async (req, res) => {
 //========================================================================================
 module.exports.registerUser = async (req, res) => {
   try {
-    let { userName, password, confirmPassword, firstname, lastname } = req.body;
+    let { userName, password, confirmPassword, firstname } = req.body;
 
     if (!userName || !password || !confirmPassword)
       return res.status(400).json({ msg: "Not all fields have been entered." });
@@ -48,7 +48,6 @@ module.exports.registerUser = async (req, res) => {
       userName: userName,
       password: passwordHash,
       firstName: firstname,
-      lastName: lastname,
     });
 
     const savedUser = await newUser.save();
