@@ -10,6 +10,7 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage.js";
 import LoginPage from "views/LoginPage.js";
 import WorkOutPage from "views/CreateWorkoutPage/App";
+import Leaderboard from "views/Leaderboard";
 // import TestLogin from 'views/TestLogin';
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
           <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/create" component={WorkOutPage} />
+          <Route path="/leaderboard" component={Leaderboard} />
 
           <Route path="/profile" component={ProfilePage} />
         </Switch>
