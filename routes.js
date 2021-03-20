@@ -29,6 +29,7 @@ router.post("/workout/completed/:wid", auth, Workout.completedworkout);
 router.get("/workout", Workout.getWorkout);
 router.get("/workout/leaderboard", Workout.getLeaderboard);
 router.get("/workout/todayleaderboard", Workout.getLeaderboardtoday);
+router.get("/workout/:wid", Workout.getWorkoutid);
 
 //========================================================================================
 /*                                                                                      *

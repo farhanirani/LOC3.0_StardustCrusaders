@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
+import { useHistory } from "react-router-dom";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -15,12 +16,21 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
+  const classes = useStyles();
+  const { ...rest } = props;
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem("auth-token")) {
+      history.push("/");
+    }
+    // eslint-disable-next-line
+  }, []);
   // const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   // setTimeout(function () {
   //   setCardAnimation("");
   // }, 700);
-  const classes = useStyles();
-  const { ...rest } = props;
+
   return (
     <div>
       <Header

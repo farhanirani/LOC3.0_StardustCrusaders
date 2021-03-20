@@ -15,12 +15,13 @@ const Completed = require("../models/completedModel");
 module.exports.createWorkout = async (req, res) => {
   try {
     const { name, desc, category, calories, steps } = req.body;
-
+    const user = await User.findOne({ _id: req.user });
     const newWorkout = new Workout({
       name: name,
       desc: desc,
       category: category,
       creatorID: req.user,
+      creatorname: user.userName,
       calories: calories,
       upvotes: [],
       downvotes: [],
@@ -65,6 +66,26 @@ module.exports.getWorkout = async (req, res) => {
       const ans = await Workout.find({ category: category });
       res.json(ans);
     }
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
+
+//========================================================================================
+/*                                                                                      *
+ *                              get workout
+ *                                                                                      */
+//========================================================================================]
+
+module.exports.getWorkoutid = async (req, res) => {
+  try {
+    const workoutid = req.params.wid;
+    var main = await Workout.find({ _id: workoutid });
+    const ans = await Steps.find({ workoutid: workoutid }).sort({ number: 1 });
+    for (var i = 0; i < ans.length; i++) {
+      main.push(ans[i]);
+    }
+    res.json(main);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
