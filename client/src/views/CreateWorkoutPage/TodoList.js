@@ -92,7 +92,7 @@ function TodoForm(props) {
             }}
           >
             <input
-              placeholder="Regimen Name"
+              placeholder="Workout Name"
               name="text"
               required
               className="todo-input"
@@ -122,20 +122,22 @@ function TodoForm(props) {
               marginBottom: "20px",
             }}
           >
-            <textarea
-              id="w3review"
-              name="w3review"
-              rows="4"
-              placeholder="Description"
+            <input
+              placeholder="Workout Description"
+              value={input}
+              onChange={handleChange1}
+              name="text"
               required
               className="todo-input"
               style={{
                 overflowX: "hidden",
                 display: "flex",
                 flexGrow: "2",
-                margin: "0px 18px",
+                margin: "0px 20px",
               }}
-            ></textarea>
+
+              // ref={inputRef}
+            />
           </div>
           <div
             style={{
@@ -145,7 +147,7 @@ function TodoForm(props) {
             }}
           >
             <input
-              placeholder="Add Workout"
+              placeholder="Step Information"
               value={input}
               onChange={handleChange1}
               name="text"
@@ -172,7 +174,7 @@ function TodoForm(props) {
               // ref={inputRef}
             />
             <input
-              placeholder="Add a tutorial"
+              placeholder="Tutorial Link"
               value={link}
               onChange={handleChange3}
               name="url"
@@ -293,7 +295,7 @@ function TodoList() {
 
   return (
     <>
-      <h1>Create your Training Regimen</h1>
+      <h1>Create your Training Workout</h1>
       <TodoForm onSubmit={addTodo} />
       <Todo
         todos={todos}
