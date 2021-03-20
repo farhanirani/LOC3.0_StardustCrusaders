@@ -52,7 +52,7 @@ module.exports.registerUser = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    res.json(savedUser);
+    res.status(200).json(savedUser);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
@@ -76,7 +76,7 @@ module.exports.tokenIsValid = async (req, res) => {
     const user = await User.findById(verified.id);
     if (!user) return res.json(false);
 
-    return res.json(user);
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

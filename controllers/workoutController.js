@@ -10,6 +10,8 @@ const Completed = require("../models/completedModel");
  *                              Workout create
  *                                                                                      */
 //========================================================================================
+// name1;123;link1$name2;32;$3333;60;
+
 module.exports.createWorkout = async (req, res) => {
   try {
     const { name, desc, category, calories, steps } = req.body;
@@ -42,7 +44,7 @@ module.exports.createWorkout = async (req, res) => {
       await newStep.save();
     }
 
-    res.json(true);
+    res.status(200).json(saved);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
@@ -92,8 +94,7 @@ module.exports.completedworkout = async (req, res) => {
     // });
 
     // const saved = await newComplete.save();
-    // res.json(saved);
-    res.json(true);
+    res.status(200).json(temp);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

@@ -9,5 +9,3 @@ const stepsSchema = new mongoose.Schema({
 });
 
 module.exports = Steps = mongoose.model("steps", stepsSchema);
-
-// name1;time1;link1$name2;time2;$3333;60mins;
