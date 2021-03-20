@@ -8,16 +8,11 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { AccountBox } from "../components/accountBox";
-import Fade from 'react-reveal/Fade';
-
+import Fade from "react-reveal/Fade";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-import image from "assets/img/bg7.jpg";
-
 const useStyles = makeStyles(styles);
-
-
 
 export default function LoginPage(props) {
   // const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -38,7 +33,8 @@ export default function LoginPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(https://image.freepik.com/free-photo/caucasian-sport-abdominal-background-wall_1296-394.jpg)",
+          backgroundImage:
+            "url(https://image.freepik.com/free-photo/caucasian-sport-abdominal-background-wall_1296-394.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "top center",
         }}
@@ -48,9 +44,8 @@ export default function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               {/* <Card className={classes[cardAnimaton]}> */}
               <Fade top>
-                <AccountBox/>
-        
-                </Fade>
+                <AccountBox />
+              </Fade>
             </GridItem>
           </GridContainer>
         </div>
