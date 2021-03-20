@@ -6,11 +6,11 @@ import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
 const BoxContainer = styled.div`
-  width: 280px;
+  width: 350px;
   min-height: 550px;
   display: flex;
   flex-direction: column;
-  border-radius: 19px;
+  border-radius: 25px;
   background-color: #fff;
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
@@ -35,14 +35,10 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  top: -290px;
+  top: -310px;
   left: -70px;
-  background: rgb(241, 196, 15);
-  background: linear-gradient(
-    58deg,
-    rgba(241, 196, 15, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
-  );
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
 `;
 
 const HeaderContainer = styled.div`

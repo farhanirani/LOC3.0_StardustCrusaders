@@ -8,7 +8,7 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 import UserContext from "./context/UserContext";
 import LandingPage from "views/LandingPage/LandingPage.js";
 // import ProfilePage from "views/ProfilePage.js";
-// import LoginPage from "views/LoginPage.js";
+import LoginPage from "views/LoginPage.js";
 // import TestLogin from 'views/TestLogin';
 
 export default function App() {
@@ -47,8 +47,8 @@ export default function App() {
       <UserContext.Provider value={{ userData, setUserData }}>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          {/* <Route path="/login" component={LoginPage} />
-          <Route path="/profile" component={ProfilePage} />
+          <Route path="/login" component={LoginPage} />
+          {/* <Route path="/profile" component={ProfilePage} />
           <Route path="/test" component={TestLogin}></Route> */}
         </Switch>
       </UserContext.Provider>
