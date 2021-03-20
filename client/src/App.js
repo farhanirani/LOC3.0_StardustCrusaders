@@ -7,7 +7,7 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 // pages for this product
 import UserContext from "./context/UserContext";
 import LandingPage from "views/LandingPage/LandingPage.js";
-// import ProfilePage from "views/ProfilePage.js";
+import ProfilePage from "views/ProfilePage.js";
 import LoginPage from "views/LoginPage.js";
 import WorkOutPage from "views/CreateWorkoutPage/App";
 // import TestLogin from 'views/TestLogin';
@@ -51,8 +51,7 @@ export default function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/create" component={WorkOutPage} />
 
-          {/* <Route path="/profile" component={ProfilePage} />
-          <Route path="/test" component={TestLogin}></Route> */}
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </UserContext.Provider>
     </BrowserRouter>
