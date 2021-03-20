@@ -6,18 +6,23 @@ import Products from "./components/Products";
 import { productData, productDataTwo } from "./components/Products/data";
 import Feature from "./components/Feature";
 import Footer from "./components/Footer";
+import Fade from "react-reveal/Fade";
 
 function HomePage() {
   return (
     <Router>
       <GlobalStyle />
       <Hero />
-      <Products heading="Choose your hurdle" data={productData} />
+      <Fade left>
+        <Products heading="Choose your hurdle" data={productData} />
+      </Fade>
       <Feature />
-      <Products
-        heading="Check out these Community Workouts"
-        data={productDataTwo}
-      />
+      <Fade right>
+        <Products
+          heading="Check out these Community Workouts"
+          data={productDataTwo}
+        />
+      </Fade>
       <Footer />
     </Router>
   );

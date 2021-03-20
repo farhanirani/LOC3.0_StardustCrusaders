@@ -9,8 +9,9 @@ import UserContext from "./context/UserContext";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage.js";
 import LoginPage from "views/LoginPage.js";
-import WorkOutPage from "views/CreateWorkoutPage/CreateWorkoutPage";
+import CreateWorkOutPage from "views/CreateWorkoutPage/CreateWorkoutPage";
 import Leaderboard from "views/Leaderboard";
+import WorkOutPage from "views/WorkoutPage/WorkoutPage";
 // import TestLogin from 'views/TestLogin';
 import HomePage from "views/HomePage/HomePage";
 // import HomePage from "views/HomePage/HomePage";
@@ -52,8 +53,9 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={LoginPage} />
-          <Route path="/create" component={WorkOutPage} />
+          <Route path="/create" component={CreateWorkOutPage} />
           <Route path="/leaderboard" component={Leaderboard} />
+          <Route path="/workout" component={WorkOutPage} />
 
           <Route path="/home" component={HomePage} />
           <Route path="/profile" component={ProfilePage} />

@@ -1,0 +1,9 @@
+.times {
+  display: -webkit-flex;
+  justify-content: center;
+}
+
+#time-left {
+  font-weight: 700;
+  font-size: 20px;
+}
