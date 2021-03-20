@@ -5,6 +5,10 @@ import Fab from "@material-ui/core/Fab";
 import { useState, useEffect } from "react";
 import { useTransition, animated, config } from "react-spring";
 import "./style.css";
+import Header from "../../components/Header/Header";
+import HeaderLinks from "../../components/Header/HeaderLinks.js";
+
+const dashboardRoutes = [];
 
 const slides = [
   {
@@ -59,10 +63,24 @@ const BgSlide = () => {
   ));
 };
 
-function App() {
+function App(props) {
+  const { ...rest } = props;
+
   return (
     <div className="todo-app">
       <BgSlide></BgSlide>
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        brand="Material Kit React"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white",
+        }}
+        {...rest}
+      />
       <TodoList />
       <div
         style={{
