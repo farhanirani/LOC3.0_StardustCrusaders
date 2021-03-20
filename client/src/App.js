@@ -12,6 +12,8 @@ import LoginPage from "views/LoginPage.js";
 import WorkOutPage from "views/CreateWorkoutPage/App";
 import Leaderboard from "views/Leaderboard";
 // import TestLogin from 'views/TestLogin';
+import HomePage from "views/HomePage/HomePage";
+// import HomePage from "views/HomePage/HomePage";
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -53,6 +55,7 @@ export default function App() {
           <Route path="/create" component={WorkOutPage} />
           <Route path="/leaderboard" component={Leaderboard} />
 
+          <Route path="/home" component={HomePage} />
           <Route path="/profile" component={ProfilePage} />
         </Switch>
       </UserContext.Provider>
