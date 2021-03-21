@@ -9,7 +9,7 @@ const auth = require("./middleware/auth");
 
 const User = require("./controllers/userController");
 
-router.get("/users/", auth, User.homeUser);
+router.get("/users/:id", User.homeUser);
 router.post("/users/register", User.registerUser);
 router.post("/users/login", User.loginUser);
 router.post("/users/checktoken", User.tokenIsValid);

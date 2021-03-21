@@ -9,7 +9,7 @@ const User = require("../models/userModel");
 //========================================================================================
 
 module.exports.homeUser = async (req, res) => {
-  const user = await User.findOne({ _id: req.user });
+  const user = await User.findOne({ _id: req.params.id });
   res.json({
     userName: user.userName,
     id: user._id,
