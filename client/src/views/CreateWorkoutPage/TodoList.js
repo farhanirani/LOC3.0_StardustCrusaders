@@ -295,12 +295,21 @@ function TodoList() {
       </h1>
       <TodoForm onSubmit={addTodo} />
       {todos && (
-        <Todo
-          todos={todos}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "400px",
+            overflow: "auto",
+          }}
+        >
+          <Todo
+            todos={todos}
+            completeTodo={completeTodo}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+          />
+        </div>
       )}
     </>
   );

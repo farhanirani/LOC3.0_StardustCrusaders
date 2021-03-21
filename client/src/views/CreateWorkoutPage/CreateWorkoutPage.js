@@ -66,28 +66,37 @@ function App(props) {
   const { ...rest } = props;
 
   return (
-    <div className="todo-app">
-      <BgSlide></BgSlide>
-      <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white",
-        }}
-        {...rest}
-      />
-      <TodoList />
-      <div
-        style={{
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      ></div>
+    <div
+      style={{
+        height: "100%",
+        maxHeight: "100vh",
+        overflow: "hidden",
+        width: "100%",
+      }}
+    >
+      <div className="todo-app">
+        <BgSlide></BgSlide>
+        <Header
+          color="transparent"
+          routes={dashboardRoutes}
+          brand="Material Kit React"
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 400,
+            color: "white",
+          }}
+          {...rest}
+        />
+        <TodoList />
+        <div
+          style={{
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        ></div>
+      </div>
     </div>
   );
 }
