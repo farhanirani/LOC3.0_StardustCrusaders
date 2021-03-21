@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
 import Leaderboard from "@material-ui/icons/TrendingUp";
-import Community from "@material-ui/icons/PeopleAlt";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
