@@ -190,7 +190,11 @@ export default function HeaderLinks(props) {
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>My Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <a href="/profile" style={{ textDecoration: "none" }}>
+                        My Profile
+                      </a>
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -202,6 +206,7 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         <Button
           variant="contained"
+          href="/login"
           color="secondary"
           style={{
             backgroundColor: "#000000",
