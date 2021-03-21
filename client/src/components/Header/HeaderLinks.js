@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -18,13 +16,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Avatar from "@material-ui/core/Avatar";
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
 import Home from "@material-ui/icons/Home";
 import Leaderboard from "@material-ui/icons/TrendingUp";
 import SportsKabaddiIcon from "@material-ui/icons/SportsKabaddi";
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
@@ -68,32 +64,21 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
+        <Button href="/home" color="transparent" className={classes.navLink}>
           <Home className={classes.icons} /> Home
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/leaderboard"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           <Leaderboard className={classes.icons} /> Leaderboard
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
+        <Button href="/" color="transparent" className={classes.navLink}>
           <SportsKabaddiIcon
             className={classes.icons}
             style={{ marginRight: "8px" }}
@@ -213,6 +198,20 @@ export default function HeaderLinks(props) {
             </Grow>
           )}
         </Popper>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{
+            backgroundColor: "#000000",
+            backgroundImage: "linear-gradient(147deg,#000000 0%, #04619f 74%)",
+            fontWeight: "700",
+            borderRadius: "15px",
+          }}
+        >
+          Get Started
+        </Button>
       </ListItem>
     </List>
   );
