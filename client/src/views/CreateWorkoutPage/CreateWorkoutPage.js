@@ -6,6 +6,7 @@ import { useTransition, animated, config } from "react-spring";
 import "./style.css";
 import Header from "../../components/Header/Header";
 import HeaderLinks from "../../components/Header/HeaderLinks.js";
+import { useHistory } from "react-router-dom";
 
 const dashboardRoutes = [];
 
@@ -64,6 +65,14 @@ const BgSlide = () => {
 
 function App(props) {
   const { ...rest } = props;
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem("auth-token")) {
+      history.push("/");
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div

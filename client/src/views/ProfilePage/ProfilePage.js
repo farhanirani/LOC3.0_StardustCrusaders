@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 // nodejs library that concatenates classes
+import { useHistory } from "react-router-dom";
+
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,6 +43,9 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  const tokenn = localStorage.getItem("auth-token");
+  const history = useHistory();
+
   return (
     <div>
       <Header

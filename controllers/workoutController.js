@@ -33,16 +33,17 @@ module.exports.createWorkout = async (req, res) => {
     const stepss = steps.split("$");
     for (var i = 0; i < stepss.length; i++) {
       temp = stepss[i].split(";");
-      //   console.log(temp);
-
-      const newStep = new Steps({
-        workoutid: saved._id,
-        number: i + 1,
-        information: temp[0],
-        duration: temp[1],
-        link: temp[2],
-      });
-      await newStep.save();
+      // console.log(temp);
+      if (temp.length !== 1) {
+        const newStep = new Steps({
+          workoutid: saved._id,
+          number: i + 1,
+          information: temp[0],
+          duration: temp[1],
+          link: temp[2],
+        });
+        await newStep.save();
+      }
     }
 
     res.status(200).json(saved);
@@ -59,13 +60,15 @@ module.exports.createWorkout = async (req, res) => {
 module.exports.getWorkout = async (req, res) => {
   try {
     const { category } = req.body;
-    if (category == "general") {
-      const ans = await Workout.find({});
-      res.json(ans);
-    } else {
-      const ans = await Workout.find({ category: category });
-      res.json(ans);
-    }
+    const ans = await Workout.find({});
+    res.json(ans);
+    // if (category == "general") {
+    //   const ans = await Workout.find({});
+    //   res.json(ans);
+    // } else {
+    //   const ans = await Workout.find({ category: category });
+    //   res.json(ans);
+    // }
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
@@ -100,12 +103,12 @@ module.exports.getWorkoutid = async (req, res) => {
 module.exports.completedworkout = async (req, res) => {
   try {
     const workoutid = req.params.wid;
-    const { username } = req.body;
+    const user = await User.findOne({ _id: req.user });
     // console.log(workoutid);
     const temp = await Workout.findById(workoutid);
     const newComplete = new Completed({
       userid: req.user,
-      username: username,
+      username: user.userName,
       workoutid: workoutid,
       calories: temp.calories,
     });
