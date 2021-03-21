@@ -11,6 +11,9 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import CountDown from "views/WorkoutPage/Timer/App";
 import Button from "@material-ui/core/Button";
 import Flip from "react-reveal/Flip";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import ReportIcon from "@material-ui/icons/Report";
 
 const dashboardRoutes = [];
 
@@ -24,6 +27,9 @@ export default function LandingPage(props) {
   const wid = window.location.pathname.substring(9);
   const [render, setRender] = useState(false);
   const [tt, setTt] = useState(0);
+
+  const min = (tt - (tt % 60)) / 60;
+  const sec = tt % 60;
 
   useEffect(() => {
     (async () => {
@@ -73,6 +79,8 @@ export default function LandingPage(props) {
                 textAlign: "center",
                 color: "#fff",
                 alignContent: "center",
+                fontSize: "3rem",
+                fontWeight: "700",
               }}
             >
               {workoutinfo[0].name}
@@ -101,7 +109,8 @@ export default function LandingPage(props) {
             >
               <h4
                 style={{
-                  fontWeight: "700px",
+                  fontWeight: "700",
+                  fontSize: "21px",
                   textAlign: "center",
                   margin: "0",
                   padding: "5px",
@@ -111,13 +120,34 @@ export default function LandingPage(props) {
               </h4>
               <h5
                 style={{
-                  fontWeight: "700px",
                   textAlign: "center",
                   margin: "0",
                   padding: "5px",
+                  color: "#bcbfc8",
+                  fontSize: "17px",
+                  fontWeight: "normal",
                 }}
               >
-                Duration : {tt}
+                Duration : {min} min. {sec} sec.
+              </h5>
+              <h5
+                style={{
+                  textAlign: "center",
+                  margin: "0",
+                  padding: "5px",
+                  color: "#bcbfc8",
+                  fontSize: "17px",
+                  fontWeight: "normal",
+                }}
+              >
+                Created By :
+                <a
+                  href="creatorprofilelink"
+                  style={{ color: "white", textDecoration: "underline" }}
+                >
+                  {" "}
+                  CreatorName{" "}
+                </a>
               </h5>
             </div>
             <div
@@ -128,7 +158,7 @@ export default function LandingPage(props) {
             >
               <h3
                 style={{
-                  fontWeight: "700px",
+                  fontWeight: "700",
                   textAlign: "center",
                   color: "#FCFE9C",
                   marginBottom: "10px",
@@ -168,6 +198,18 @@ export default function LandingPage(props) {
                       alignItems: "center",
                     }}
                   >
+                    <a
+                      href="/"
+                      target="_blank"
+                      style={{
+                        color: "#FCFE9C",
+                        margin: "0px 10px",
+                        fontSize: "18px",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Tutorial{" "}
+                    </a>
                     <div>
                       <CountDown defaultSessionLength={step.duration} />
                     </div>
@@ -198,6 +240,30 @@ export default function LandingPage(props) {
                 Workout Completed!
               </Button>
             </Flip>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              style={{ margin: "10px", color: "red" }}
+            >
+              <FavoriteBorderIcon style={{ height: "30px", width: "30px" }} />
+            </IconButton>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              style={{ margin: "10px" }}
+            >
+              <ReportIcon style={{ height: "30px", width: "30px" }} />
+            </IconButton>
           </div>
         </div>
       </div>
