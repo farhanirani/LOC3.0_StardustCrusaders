@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -11,6 +10,7 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import CountDown from "views/WorkoutPage/Timer/App";
 import Button from "@material-ui/core/Button";
 import Flip from "react-reveal/Flip";
+import { useHistory } from "react-router-dom";
 
 const dashboardRoutes = [];
 
@@ -18,12 +18,33 @@ const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
   const classes = useStyles();
-  const history = useHistory();
   const [workoutinfo, setWinfo] = useState([]);
   const [steps, setSteps] = useState([]);
   const wid = window.location.pathname.substring(9);
   const [render, setRender] = useState(false);
   const [tt, setTt] = useState(0);
+  const tokenn = localStorage.getItem("auth-token");
+  const postId = window.location.pathname.substring(9);
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (!tokenn) {
+        alert("Please login first");
+      } else {
+        const loginRes = await axios.post(
+          "/api/workout/completed/" + postId,
+          {},
+          { headers: { "x-auth-token": tokenn } }
+        );
+        history.push("/profile");
+      }
+    } catch (err) {
+      console.log(err.response.data.msg);
+      alert(err.response.data.msg);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -194,6 +215,7 @@ export default function LandingPage(props) {
                   color: "#1D1D1D",
                   fontWeight: "700",
                 }}
+                onClick={handleSubmit}
               >
                 Workout Completed!
               </Button>

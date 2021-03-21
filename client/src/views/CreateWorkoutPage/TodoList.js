@@ -2,23 +2,20 @@ import React, { useState } from "react";
 // import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import Fab from "@material-ui/core/Fab";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-function TodoForm(props) {
-  const [input, setInput] = useState(props.edit ? props.edit.value : "");
-  const [link, setLink] = useState(props.edit ? props.edit.value : "");
+function TodoList() {
+  const history = useHistory();
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+  const [link, setLink] = useState("");
   const [time, setTime] = React.useState("");
-  const [title, setTitle] = useState(props.edit ? props.edit.value : "");
-  const [calory, setCalory] = useState(props.edit ? props.edit.value : "");
-  const [category, setCategory] = useState(props.edit ? props.edit.value : "");
-  const [description, setDescription] = useState(
-    props.edit ? props.edit.value : ""
-  );
-
-  // const inputRef = useRef(null);
-
-  // useEffect(() => {
-  //   inputRef.current.focus();
-  // });
+  const [title, setTitle] = useState("");
+  const [calory, setCalory] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [farhan, setFarhan] = useState([]);
 
   const handleChange1 = (e) => {
     setInput(e.target.value);
@@ -50,23 +47,101 @@ function TodoForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(input, time, link);
+    console.log(todos);
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input,
-      time: time,
-      link: link,
-    });
+    setTodos((todos) => [
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 10000),
+        text: input,
+        time: time,
+        link: link,
+      },
+    ]);
+
     setInput("");
     setTime("");
     setLink("");
   };
+  const tokenn = localStorage.getItem("auth-token");
 
-  const handleSubmit2 = (e) => {};
+  const handleSubmit2 = async (e) => {
+    console.log(todos);
+
+    var stt = "";
+    for (var i = 0; i < todos.length; i++) {
+      var temp = "" + todos[i].text + ";" + todos[i].time + ";" + todos[i].link;
+      stt += temp + "$";
+    }
+    console.log(stt);
+
+    const newworkout = {
+      name: title,
+      desc: description,
+      category: category,
+      calories: calory,
+      steps: stt,
+    };
+    console.log(newworkout);
+    try {
+      const asd = await axios.post("/api/workout/create", newworkout, {
+        headers: { "x-auth-token": tokenn },
+      });
+      history.push("/workout/" + asd.data._id);
+    } catch (err) {
+      alert(err.response.data.msg);
+    }
+  };
+
+  const addTodo = (todo) => {
+    if (
+      !todo.text ||
+      (/^\s*$/.test(todo.text) && !todo.value) ||
+      (/^\s*$/.test(todo.value) && !todo.link) ||
+      /^\s*$/.test(todo.link)
+    ) {
+      return;
+    }
+
+    const newTodos = [todo, ...todos];
+
+    setTodos(newTodos);
+    console.log(newTodos);
+  };
+
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return;
+    }
+
+    setTodos((prev) =>
+      prev.map((item) => (item.id === todoId ? newValue : item))
+    );
+  };
+
+  const removeTodo = (id) => {
+    const removedArr = [...todos].filter((todo) => todo.id !== id);
+
+    setTodos(removedArr);
+  };
+
+  const completeTodo = (id) => {
+    let updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.isComplete = !todo.isComplete;
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit2} className="todo-form">
+      <h1 style={{ color: "#000", fontWeight: "700" }}>
+        Create your Training Workout
+      </h1>
+      <form onSubmit={addTodo} className="todo-form">
         <>
           <div
             style={{
@@ -212,96 +287,27 @@ function TodoForm(props) {
           Submit
         </Fab>
       </form>
-    </>
-  );
-}
-
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
-  return todos.map((todo, index) => (
-    <div
-      className={todo.isComplete ? "todo-row complete" : "todo-row"}
-      key={index}
-    >
-      <div>{todo.text}</div>
-      <div>{todo.time} sec.</div>
-      <div>
-        <a href={todo.link} style={{ color: "#fff", cursor: "pointer" }}>
-          Tutorial
-        </a>
-      </div>
-      <div className="icons">
-        <RiCloseCircleLine
-          onClick={() => removeTodo(todo.id)}
-          className="delete-icon"
-        />
-        {/* <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
-          className="edit-icon"
-        /> */}
-      </div>
-    </div>
-  ));
-};
-
-function TodoList() {
-  const [todos, setTodos] = useState([]);
-
-  const addTodo = (todo) => {
-    if (
-      !todo.text ||
-      (/^\s*$/.test(todo.text) && !todo.value) ||
-      (/^\s*$/.test(todo.value) && !todo.link) ||
-      /^\s*$/.test(todo.link)
-    ) {
-      return;
-    }
-
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
-    console.log(newTodos);
-  };
-
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
-
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
-    );
-  };
-
-  const removeTodo = (id) => {
-    const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removedArr);
-  };
-
-  const completeTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  return (
-    <>
-      <h1 style={{ color: "#000", fontWeight: "700" }}>
-        Create your Training Workout
-      </h1>
-      <TodoForm onSubmit={addTodo} />
-      {todos && (
-        <Todo
-          todos={todos}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
-      )}
+      {todos &&
+        todos.map((todo, index) => (
+          <div
+            className={todo.isComplete ? "todo-row complete" : "todo-row"}
+            key={index}
+          >
+            <div>{todo.text}</div>
+            <div>{todo.time} sec.</div>
+            <div>
+              <a href={todo.link} style={{ color: "#fff", cursor: "pointer" }}>
+                Tutorial
+              </a>
+            </div>
+            <div className="icons">
+              <RiCloseCircleLine
+                onClick={() => removeTodo(todo.id)}
+                className="delete-icon"
+              />
+            </div>
+          </div>
+        ))}
     </>
   );
 }
