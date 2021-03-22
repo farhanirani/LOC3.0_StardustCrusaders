@@ -8,6 +8,7 @@ import {
   HeroH1,
   HeroP,
   HeroBtn,
+  HeroBtn2,
 } from "./HeroElements";
 
 const dashboardRoutes = [];
@@ -39,6 +40,7 @@ const Hero = (props) => {
           <HeroH1>Race to the top</HeroH1>
           <HeroP>Be an emerging champ</HeroP>
           <HeroBtn>Check Leaderboard</HeroBtn>
+          <HeroBtn2>Create your Workout</HeroBtn2>
         </HeroItems>
       </HeroContent>
     </HeroContainer>
