@@ -14,6 +14,7 @@ import Leaderboard from "views/Leaderboard";
 import WorkOutPage from "views/WorkoutPage/WorkoutPage";
 // import TestLogin from 'views/TestLogin';
 import HomePage from "views/HomePage/HomePage";
+import CompetePage from "./views/CompetePage";
 // import HomePage from "views/HomePage/HomePage";
 
 export default function App() {
@@ -59,6 +60,7 @@ export default function App() {
 
           <Route path="/home" component={HomePage} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/compete" component={CompetePage} />
         </Switch>
       </UserContext.Provider>
     </BrowserRouter>

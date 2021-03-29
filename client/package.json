@@ -17,6 +17,7 @@
     "react": "16.13.1",
     "react-datetime": "2.16.3",
     "react-dom": "16.13.1",
+    "react-geolocated": "^3.1.0",
     "react-icons": "^4.2.0",
     "react-responsive": "^8.2.0",
     "react-reveal": "^1.2.2",
