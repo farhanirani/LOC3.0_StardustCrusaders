@@ -60,3 +60,20 @@ export const HeroBtn = styled.button`
     color: #000;
   }
 `;
+
+export const HeroBtn2 = styled.button`
+  font-size: 1.4rem;
+  padding: 1rem 4rem;
+  border: none;
+  background: #ffc500;
+  color: #000;
+  transition: 0.2s ease-out;
+  margin-top: 10px;
+
+  &:hover {
+    background: #e31837;
+    transition: 0.2s ease-out;
+    cursor: pointer;
+    color: #fff;
+  }
+`;

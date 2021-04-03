@@ -78,7 +78,7 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button href="/" color="transparent" className={classes.navLink}>
+        <Button href="/compete" color="transparent" className={classes.navLink}>
           <SportsKabaddiIcon
             className={classes.icons}
             style={{ marginRight: "8px" }}
