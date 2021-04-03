@@ -151,25 +151,7 @@ export default function LandingPage(props) {
               >
                 Duration : {min} min. {sec} sec.
               </h5>
-              <h5
-                style={{
-                  textAlign: "center",
-                  margin: "0",
-                  padding: "5px",
-                  color: "#bcbfc8",
-                  fontSize: "17px",
-                  fontWeight: "normal",
-                }}
-              >
-                Created By :
-                <a
-                  href="creatorprofilelink"
-                  style={{ color: "white", textDecoration: "underline" }}
-                >
-                  {" "}
-                  CreatorName{" "}
-                </a>
-              </h5>
+              
             </div>
             <div
               style={{
